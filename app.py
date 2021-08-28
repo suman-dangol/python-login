@@ -1,11 +1,20 @@
 from tkinter import *
 import sqlite3
 import bcrypt
+from View import login
+from View.registerview import registerView
+from View.login import loginView
 
 root = Tk()
 username = StringVar()
 password = StringVar()
 fullname = StringVar()
+
+signup_frame = Frame(root)
+signup_frame.pack()
+
+login_frame = Frame(root)
+login_frame.pack()
 
 root.geometry('500x500+200+100')
 
@@ -27,17 +36,6 @@ def register():
     db.commit()
 
 
-Label(root, text="Login", fg="#999", padx=10,
-      pady=10, font=("Arial", 24)).pack(fill=BOTH)
-Label(root, text="fullname", fg="#222", pady=2, font=("Arial", 14)).pack()
-Entry(root, textvar=fullname, width=50, borderwidth=5,
-      bg="#999", fg="#111", relief=FLAT).pack()
-Label(root, text="username", fg="#222", pady=2, font=("Arial", 14)).pack()
-Entry(root, textvar=username, width=50, borderwidth=5,
-      bg="#999", fg="#111", relief=FLAT).pack()
-Label(root, text="password", fg="#222", pady=2, font=("Arial", 14)).pack()
-Entry(root, textvar=password, width=50, show="*", borderwidth=5,
-      bg="#999", fg="#111", relief=FLAT).pack()
-Button(root, text="register", bg="green", border=0, font=("""Arial
-                                                       """, 14), padx=10, pady=5, fg="#fff", activebackground="green", activeforeground="white", command=register).pack()
+registerView(signup_frame, fullname, username, password, register)
+loginView(login_frame, fullname, username, password, login)
 root.mainloop()
